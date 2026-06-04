@@ -56,7 +56,7 @@ interface Project {
   image: string;
   description: string;
   tech: string[];
-  platform: "Android" | "iOS" | "Cross-Platform";
+  platform: string
 }
 
 interface Skill {
