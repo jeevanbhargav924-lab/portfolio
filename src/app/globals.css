@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+
+  --color-brand-bg: #030014;
+  --color-brand-cyan: #00f0ff;
+  --color-brand-purple: #8b5cf6;
+  --color-brand-dark-purple: #1e1b4b;
+  --color-card-border: rgba(255, 255, 255, 0.08);
+  --color-card-bg: rgba(10, 7, 24, 0.6);
+  
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-spin-slow: spin 20s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow: glow 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(0, 240, 255, 0.3)) drop-shadow(0 0 10px rgba(139, 92, 246, 0.2)); }
+  50% { filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.6)) drop-shadow(0 0 25px rgba(139, 92, 246, 0.4)); }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #030014;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.3);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 240, 255, 0.5);
+}
+
+/* Custom Utilities for Glassmorphism and Backdrop Gradients */
+.glassmorphism {
+  background: rgba(10, 7, 24, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glassmorphism-light {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Neon Glow utilities */
+.glow-cyan {
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.15);
+}
+
+.glow-purple {
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.15);
+}
+
+.text-glow {
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+}
+
+/* Background Grid Pattern */
+.bg-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(139, 92, 246, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+}
+
+/* Custom typing cursor */
+.typing-cursor::after {
+  content: '|';
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
