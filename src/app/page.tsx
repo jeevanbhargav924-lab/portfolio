@@ -30,7 +30,8 @@ import {
   Zap,
   CreditCard,
   Bell,
-  Users
+  Users,
+  ChevronLeft
 } from "lucide-react";
 
 // Local brand icons since newer versions of lucide-react do not export them
@@ -68,6 +69,404 @@ interface SkillCategory {
   title: string;
   icon: React.ReactNode;
   skills: Skill[];
+}
+
+// Generate screenshots for a project
+const getProjectScreenshots = (project: Project) => {
+  const gradients = [
+    "from-cyan-500/20 to-purple-500/20",
+    "from-purple-500/20 to-pink-500/20",
+    "from-pink-500/20 to-orange-500/20",
+    "from-orange-500/20 to-cyan-500/20",
+    "from-cyan-500/20 to-blue-500/20",
+    "from-blue-500/20 to-violet-500/20"
+  ];
+
+  if (project.name === "My Fairly") {
+    const myFairlySlides = [
+      {
+        title: "Welcome & Onboarding",
+        description: "Sleek and friendly welcome page designed to onboard users and service providers smoothly.",
+        image: "/projects/myfairly_4.png",
+        gradient: "from-purple-500/20 to-indigo-500/20"
+      },
+      {
+        title: "Discover Services",
+        description: "Real-time dashboard to explore trending, nearby, and top-rated concierge services instantly.",
+        image: "/projects/myfairly_5.png",
+        gradient: "from-indigo-500/20 to-blue-500/20"
+      },
+      {
+        title: "Service Details & Booking",
+        description: "Transparent view of service pricing, provider reviews, and direct secure scheduling.",
+        image: "/projects/myfairly_1.png",
+        gradient: "from-blue-500/20 to-cyan-500/20"
+      },
+      {
+        title: "Real-time Chat Portal",
+        description: "Interactive in-app chat system for immediate, direct client-provider communication.",
+        image: "/projects/myfairly_3.png",
+        gradient: "from-cyan-500/20 to-teal-500/20"
+      },
+      {
+        title: "Profile & Dashboard",
+        description: "Manage job requests, active bookings, user ratings, saved cards, and payout settings.",
+        image: "/projects/myfairly_2.png",
+        gradient: "from-teal-500/20 to-purple-500/20"
+      }
+    ];
+    return myFairlySlides.map((slide, i) => ({
+      id: i,
+      ...slide
+    }));
+  }
+
+  if (project.name === "KickScore") {
+    const kickScoreSlides = [
+      {
+        title: "Live Match Feeds",
+        description: "Real-time sports score listings with instant live statuses across top leagues.",
+        image: "/projects/kickscore_1.png",
+        gradient: "from-cyan-500/20 to-purple-500/20"
+      },
+      {
+        title: "Multi-Sport Match Finder",
+        description: "Explore matches across various sports like football and basketball from a unified interface.",
+        image: "/projects/kickscore_2.png",
+        gradient: "from-purple-500/20 to-pink-500/20"
+      },
+      {
+        title: "Basketball Game Analytics",
+        description: "Instant stats, scoreboards, quarters tables, and full timeline events at a glance.",
+        image: "/projects/kickscore_3.png",
+        gradient: "from-pink-500/20 to-orange-500/20"
+      },
+      {
+        title: "Match Center Hub",
+        description: "In-depth insights, starting lineups, standing tables, and win probability predictions.",
+        image: "/projects/kickscore_4.png",
+        gradient: "from-orange-500/20 to-cyan-500/20"
+      }
+    ];
+    return kickScoreSlides.map((slide, i) => ({
+      id: i,
+      ...slide
+    }));
+  }
+
+  if (project.name === "Visualible") {
+    const visualibleSlides = [
+      {
+        title: "Browse MeBooks Store",
+        description: "Explore a growing library of demanding books enhanced for easier, structured orientation.",
+        image: "/projects/visualible_1.png",
+        gradient: "from-purple-500/20 to-pink-500/20"
+      },
+      {
+        title: "Know the Book Before You Read",
+        description: "Get a complete book overview, chapter lengths, author bios, and summary insights before opening.",
+        image: "/projects/visualible_2.png",
+        gradient: "from-pink-500/20 to-orange-500/20"
+      },
+      {
+        title: "Immersive Enhanced Reading",
+        description: "Read books with enhanced, interactive layout aids that keep the original text completely unchanged.",
+        image: "/projects/visualible_3.png",
+        gradient: "from-orange-500/20 to-cyan-500/20"
+      },
+      {
+        title: "Send Inline Suggestions",
+        description: "Help future readers by highlighting passages and submitting recommendations directly as you read.",
+        image: "/projects/visualible_4.png",
+        gradient: "from-cyan-500/20 to-purple-500/20"
+      }
+    ];
+    return visualibleSlides.map((slide, i) => ({
+      id: i,
+      ...slide
+    }));
+  }
+
+  if (project.name === "IQONS") {
+    const iqonsSlides = [
+      {
+        title: "Wall of Football",
+        description: "Share match experiences, rate games, and eternalize your football legacy on your profile.",
+        image: "/projects/iqons_1.png",
+        gradient: "from-orange-500/20 to-cyan-500/20"
+      },
+      {
+        title: "Social Feed Channel",
+        description: "Follow other fans, comment on trending discussions, and share live matches directly.",
+        image: "/projects/iqons_2.png",
+        gradient: "from-cyan-500/20 to-blue-500/20"
+      },
+      {
+        title: "Matches & Groups",
+        description: "Join upcoming league match hubs, track game schedules, and connect with other fans.",
+        image: "/projects/iqons_3.png",
+        gradient: "from-blue-500/20 to-violet-500/20"
+      },
+      {
+        title: "Live Match Chat & Lineups",
+        description: "View team lineups, chat live with other match buddies, and share game predictions in real-time.",
+        image: "/projects/iqons_4.png",
+        gradient: "from-violet-500/20 to-fuchsia-500/20"
+      }
+    ];
+    return iqonsSlides.map((slide, i) => ({
+      id: i,
+      ...slide
+    }));
+  }
+
+  return Array.from({ length: 5 }, (_, i) => ({
+    id: i,
+    title: `${project.name} - Screen ${i + 1}`,
+    description: `${project.description} - View ${i + 1}`,
+    image: project.image,
+    gradient: gradients[i % gradients.length]
+  }));
+};
+
+interface ProjectCardProps {
+  project: Project;
+}
+
+function ProjectCard({ project }: ProjectCardProps) {
+  const screenshots = getProjectScreenshots(project);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  // Auto-play carousel logic
+  useEffect(() => {
+    if (!isAutoPlaying || screenshots.length <= 1) return;
+
+    const interval = setInterval(() => {
+      setDirection(1);
+      setCurrentSlide((prev) => (prev === screenshots.length - 1 ? 0 : prev + 1));
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, screenshots.length]);
+
+  const handleNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (screenshots.length <= 1) return;
+    setDirection(1);
+    setCurrentSlide((prev) => (prev === screenshots.length - 1 ? 0 : prev + 1));
+  };
+
+  const handlePrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (screenshots.length <= 1) return;
+    setDirection(-1);
+    setCurrentSlide((prev) => (prev === 0 ? screenshots.length - 1 : prev - 1));
+  };
+
+  const handleDotClick = (index: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setDirection(index > currentSlide ? 1 : -1);
+    setCurrentSlide(index);
+  };
+
+  const activeSlide = screenshots[currentSlide] || {
+    title: project.name,
+    description: project.description,
+    image: project.image,
+    gradient: "from-cyan-500/20 to-purple-500/20"
+  };
+
+  const isPortrait = activeSlide.image.includes("myfairly_") ||
+                    activeSlide.image.includes("iqons_") ||
+                    activeSlide.image.includes("kickscore_");
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="glassmorphism rounded-3xl overflow-hidden border border-white/5 hover:border-cyan-400/30 transition-all duration-300 group flex flex-col hover:shadow-[0_0_30px_rgba(0,240,255,0.1)] h-full"
+    >
+      {/* Visual Preview / Mockup Carousel Header */}
+      <div 
+        className="relative h-72 w-full bg-gradient-to-b from-purple-950/20 to-black/40 overflow-hidden flex items-center justify-center p-6 border-b border-white/5"
+        onMouseEnter={() => setIsAutoPlaying(false)}
+        onMouseLeave={() => setIsAutoPlaying(true)}
+      >
+        <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
+
+        {/* Animated Gradient Background matching active slide */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20 blur-2xl scale-110">
+          <motion.div
+            key={currentSlide}
+            className={`absolute inset-0 bg-gradient-to-br ${activeSlide.gradient}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8 }}
+          />
+        </div>
+
+        {/* Device Wrapper */}
+        <div className="relative w-full h-full flex items-center justify-center">
+          <AnimatePresence mode="wait" custom={direction}>
+            <motion.div
+              key={currentSlide}
+              custom={direction}
+              initial={{ opacity: 0, scale: 0.95, x: direction > 0 ? 30 : -30 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              exit={{ opacity: 0, scale: 0.95, x: direction > 0 ? -30 : 30 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="relative h-full flex items-center justify-center"
+            >
+              {isPortrait ? (
+                /* Smartphone Mockup */
+                <div className="relative h-full aspect-[9/18.5] rounded-[1.6rem] p-1.5 bg-neutral-900 border-2 border-neutral-800 shadow-2xl ring-1 ring-white/10 flex items-center justify-center overflow-hidden">
+                  {/* Speaker and Notch */}
+                  <div className="absolute top-1 left-1/2 -translate-x-1/2 w-10 h-1.5 bg-black rounded-full z-20" />
+                  <div className="relative w-full h-full rounded-[1.2rem] overflow-hidden bg-black flex items-center justify-center">
+                    <Image
+                      src={activeSlide.image}
+                      alt={activeSlide.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      priority
+                    />
+                  </div>
+                </div>
+              ) : (
+                /* Tablet / Desktop Landscape Mockup */
+                <div className="relative h-full aspect-[4/3] rounded-[1.2rem] p-2 bg-neutral-900 border-2 border-neutral-800 shadow-2xl ring-1 ring-white/10 flex items-center justify-center overflow-hidden">
+                  {/* Camera dot */}
+                  <div className="absolute top-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-black/60 z-20" />
+                  <div className="relative w-full h-full rounded-[0.8rem] overflow-hidden bg-black flex items-center justify-center">
+                    <Image
+                      src={activeSlide.image}
+                      alt={activeSlide.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      priority
+                    />
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Left/Right Navigation Arrows (Visible on card hover) */}
+          {screenshots.length > 1 && (
+            <>
+              <button
+                onClick={handlePrev}
+                className="absolute left-2 w-8 h-8 rounded-full glassmorphism border border-white/10 hover:border-cyan-400/50 hover:bg-cyan-950/20 text-white flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100"
+                aria-label="Previous slide"
+              >
+                <ChevronLeft size={14} />
+              </button>
+              <button
+                onClick={handleNext}
+                className="absolute right-2 w-8 h-8 rounded-full glassmorphism border border-white/10 hover:border-cyan-400/50 hover:bg-cyan-950/20 text-white flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100"
+                aria-label="Next slide"
+              >
+                <ChevronRight size={14} />
+              </button>
+            </>
+          )}
+
+          {/* Carousel Dots */}
+          {screenshots.length > 1 && (
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-1 z-10">
+              {screenshots.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={(e) => handleDotClick(idx, e)}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    currentSlide === idx
+                      ? "bg-cyan-400 w-3 shadow-[0_0_8px_rgba(0,240,255,0.4)]"
+                      : "bg-white/20 w-1.5 hover:bg-white/30"
+                  }`}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Platform Badge */}
+        <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono font-semibold tracking-wider uppercase text-slate-300 z-10">
+          {project.platform}
+        </div>
+      </div>
+
+      {/* Content info */}
+      <div className="p-8 flex-grow flex flex-col justify-between bg-slate-950/20">
+        <div>
+          <div className="flex items-center justify-between mb-3">
+            <h4 className="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors duration-300">
+              {project.name}
+            </h4>
+          </div>
+
+          <p className="text-slate-400 text-sm leading-relaxed mb-4">
+            {project.description}
+          </p>
+
+          {/* Dynamic Active Feature Box */}
+          {screenshots.length > 1 && (
+            <div className="mb-6 p-4 rounded-2xl bg-white/5 border border-white/10 min-h-[92px] flex flex-col justify-center relative overflow-hidden backdrop-blur-sm">
+              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-400 to-purple-500" />
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentSlide}
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <span className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-md bg-cyan-500/10 border border-cyan-400/20 text-[9px] font-mono tracking-wider uppercase text-cyan-400 mb-1.5 font-bold">
+                    Feature: {activeSlide.title}
+                  </span>
+                  <p className="text-slate-300 text-xs leading-relaxed">
+                    {activeSlide.description}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          )}
+
+          {/* Tech Badges */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            {project.tech.map((t, tIdx) => (
+              <span
+                key={tIdx}
+                className="px-2.5 py-1 rounded-lg bg-cyan-950/40 border border-cyan-400/20 text-cyan-400 font-mono text-[10px] font-medium"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Action Button */}
+        <div>
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noreferrer"
+            className="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-cyan-400/30 hover:border-cyan-400/60 hover:from-cyan-500/30 hover:to-purple-500/30 text-cyan-400 font-semibold text-sm transition-all duration-300 flex items-center justify-center space-x-2 group/btn"
+          >
+            <span>View on Store</span>
+            <ExternalLink size={14} className="text-cyan-400 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+          </a>
+        </div>
+      </div>
+    </motion.div>
+  );
 }
 
 export default function Portfolio() {
@@ -234,6 +633,150 @@ For the complete visual profile, visit: https://jeevan-bhargav-portfolio.vercel.
       description: "Premium social matching and brand display workspace with robust security and fast-loading profiles.",
       tech: ["React Native Expo", "One-to-one chat", "Group Chat", "Firebase Integration"],
       platform: "iOS & Android"
+    }
+  ];
+
+  // Carousel screenshots data with static placeholder images
+  const projectScreenshots = [
+    {
+      id: 1,
+      title: "KickScore - Live Score Tracking",
+      description: "Real-time sports updates dashboard",
+      image: "/projects/kickscore.jpg",
+      gradient: "from-cyan-500/20 to-purple-500/20"
+    },
+    {
+      id: 2,
+      title: "Visualible - Immersive UI",
+      description: "Interactive visual management interface",
+      image: "/projects/visualible.jpg",
+      gradient: "from-purple-500/20 to-pink-500/20"
+    },
+    {
+      id: 3,
+      title: "My Fairly - Premium Experience",
+      description: "Concierge and payment flows",
+      image: "/projects/myfairly.jpg",
+      gradient: "from-pink-500/20 to-orange-500/20"
+    },
+    {
+      id: 4,
+      title: "IQONS - Social Platform",
+      description: "Brand matching and profiles",
+      image: "/projects/iqons.jpg",
+      gradient: "from-orange-500/20 to-cyan-500/20"
+    },
+    {
+      id: 5,
+      title: "Dashboard Analytics",
+      description: "Real-time data visualization",
+      image: "/projects/kickscore.jpg",
+      gradient: "from-cyan-500/20 to-blue-500/20"
+    },
+    {
+      id: 6,
+      title: "User Profile Screen",
+      description: "Personalized user interface",
+      image: "/projects/visualible.jpg",
+      gradient: "from-blue-500/20 to-purple-500/20"
+    },
+    {
+      id: 7,
+      title: "Payment Gateway",
+      description: "Secure checkout flow",
+      image: "/projects/myfairly.jpg",
+      gradient: "from-purple-500/20 to-violet-500/20"
+    },
+    {
+      id: 8,
+      title: "Chat Interface",
+      description: "Real-time messaging system",
+      image: "/projects/iqons.jpg",
+      gradient: "from-violet-500/20 to-fuchsia-500/20"
+    },
+    {
+      id: 9,
+      title: "Notification Center",
+      description: "Push notification management",
+      image: "/projects/kickscore.jpg",
+      gradient: "from-fuchsia-500/20 to-pink-500/20"
+    },
+    {
+      id: 10,
+      title: "Settings Panel",
+      description: "App configuration options",
+      image: "/projects/visualible.jpg",
+      gradient: "from-pink-500/20 to-rose-500/20"
+    },
+    {
+      id: 11,
+      title: "Search & Discovery",
+      description: "Smart search functionality",
+      image: "/projects/myfairly.jpg",
+      gradient: "from-rose-500/20 to-orange-500/20"
+    },
+    {
+      id: 12,
+      title: "Feed Timeline",
+      description: "Social media timeline",
+      image: "/projects/iqons.jpg",
+      gradient: "from-orange-500/20 to-amber-500/20"
+    },
+    {
+      id: 13,
+      title: "Media Gallery",
+      description: "Photo and video gallery",
+      image: "/projects/kickscore.jpg",
+      gradient: "from-amber-500/20 to-yellow-500/20"
+    },
+    {
+      id: 14,
+      title: "Map Integration",
+      description: "Location-based features",
+      image: "/projects/visualible.jpg",
+      gradient: "from-yellow-500/20 to-lime-500/20"
+    },
+    {
+      id: 15,
+      title: "Calendar View",
+      description: "Event scheduling interface",
+      image: "/projects/myfairly.jpg",
+      gradient: "from-lime-500/20 to-green-500/20"
+    },
+    {
+      id: 16,
+      title: "Task Management",
+      description: "Productivity dashboard",
+      image: "/projects/iqons.jpg",
+      gradient: "from-green-500/20 to-emerald-500/20"
+    },
+    {
+      id: 17,
+      title: "File Manager",
+      description: "Document organization",
+      image: "/projects/kickscore.jpg",
+      gradient: "from-emerald-500/20 to-teal-500/20"
+    },
+    {
+      id: 18,
+      title: "Video Player",
+      description: "Streaming interface",
+      image: "/projects/visualible.jpg",
+      gradient: "from-teal-500/20 to-cyan-500/20"
+    },
+    {
+      id: 19,
+      title: "E-commerce Cart",
+      description: "Shopping experience",
+      image: "/projects/myfairly.jpg",
+      gradient: "from-cyan-500/20 to-sky-500/20"
+    },
+    {
+      id: 20,
+      title: "Onboarding Flow",
+      description: "User onboarding screens",
+      image: "/projects/iqons.jpg",
+      gradient: "from-sky-500/20 to-blue-500/20"
     }
   ];
 
@@ -743,74 +1286,7 @@ For the complete visual profile, visit: https://jeevan-bhargav-portfolio.vercel.
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {projects.map((project, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-                className="glassmorphism rounded-3xl overflow-hidden border border-white/5 hover:border-cyan-400/30 transition-all duration-300 group flex flex-col hover:shadow-[0_0_30px_rgba(0,240,255,0.1)]"
-              >
-
-                {/* Visual Preview / Mobile Mockup Header */}
-                <div className="relative h-64 w-full bg-gradient-to-b from-purple-950/20 to-black/40 overflow-hidden flex items-center justify-center p-6 border-b border-white/5">
-                  <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
-
-                  {/* Subtle hover zoom image */}
-                  <div className="relative w-36 h-36 sm:w-40 sm:h-40 rounded-2xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-105 border border-white/10 glow-cyan">
-                    <Image
-                      src={project.image}
-                      alt={project.name}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-
-                  {/* Device Badges */}
-                  <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono font-semibold tracking-wider uppercase text-slate-300">
-                    {project.platform}
-                  </div>
-                </div>
-
-                {/* Content info */}
-                <div className="p-8 flex-grow flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <h4 className="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors duration-300">
-                        {project.name}
-                      </h4>
-                    </div>
-
-                    <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                      {project.description}
-                    </p>
-
-                    {/* Tech Badges */}
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {project.tech.map((t, tIdx) => (
-                        <span
-                          key={tIdx}
-                          className="px-2.5 py-1 rounded-lg bg-cyan-950/40 border border-cyan-400/20 text-cyan-400 font-mono text-[10px] font-medium"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Play store link */}
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="w-full py-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-400/50 hover:bg-cyan-950/20 text-white font-semibold text-sm transition-all duration-300 flex items-center justify-center space-x-2 group/btn"
-                  >
-                    <span>View on Store</span>
-                    <ExternalLink size={14} className="text-cyan-400 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-                  </a>
-                </div>
-
-              </motion.div>
+              <ProjectCard key={idx} project={project} />
             ))}
           </div>
 
