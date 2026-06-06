@@ -53,11 +53,14 @@ const Linkedin = ({ size = 18 }: { size?: number }) => (
 // Types
 interface Project {
   name: string;
-  url: string;
+  url?: string;
+  appStoreUrl?: string;
+  playStoreUrl?: string;
+  websiteUrl?: string;
   image: string;
   description: string;
   tech: string[];
-  platform: string
+  platform: string;
 }
 
 interface Skill {
@@ -238,6 +241,22 @@ function ProjectCard({ project }: ProjectCardProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  const links = [];
+  if (project.websiteUrl) {
+    const label = (project.appStoreUrl && project.playStoreUrl) ? "Website" : "Visit Website";
+    links.push({ label, url: project.websiteUrl, isStore: false });
+  }
+  if (project.appStoreUrl) {
+    const label = project.name === "Visualible" ? "App Store (iPad)" : "App Store";
+    links.push({ label, url: project.appStoreUrl, isStore: true });
+  }
+  if (project.playStoreUrl) {
+    links.push({ label: "Play Store", url: project.playStoreUrl, isStore: true });
+  }
+  if (links.length === 0 && project.url) {
+    links.push({ label: "View on Store", url: project.url, isStore: true });
+  }
 
   // Auto-play carousel logic
   useEffect(() => {
@@ -452,17 +471,25 @@ function ProjectCard({ project }: ProjectCardProps) {
           </div>
         </div>
 
-        {/* Action Button */}
-        <div>
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noreferrer"
-            className="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-cyan-400/30 hover:border-cyan-400/60 hover:from-cyan-500/30 hover:to-purple-500/30 text-cyan-400 font-semibold text-sm transition-all duration-300 flex items-center justify-center space-x-2 group/btn"
-          >
-            <span>View on Store</span>
-            <ExternalLink size={14} className="text-cyan-400 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-          </a>
+        {/* Action Buttons */}
+        <div className={`flex flex-col gap-3 ${links.length > 1 ? "sm:flex-row" : ""}`}>
+          {links.map((link, lIdx) => (
+            <a
+              key={lIdx}
+              href={link.url}
+              target="_blank"
+              rel="noreferrer"
+              className={`py-3 px-3 rounded-xl text-center font-semibold text-xs sm:text-sm transition-all duration-300 flex items-center justify-center space-x-1.5 group/btn border
+                ${links.length > 1 && !link.isStore
+                  ? "flex-1 bg-white/5 border-white/10 hover:border-cyan-400/50 hover:bg-cyan-950/20 text-white"
+                  : "flex-1 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border-cyan-400/30 hover:border-cyan-400/60 hover:from-cyan-500/30 hover:to-purple-500/30 text-cyan-400"
+                }
+              `}
+            >
+              <span>{link.label}</span>
+              <ExternalLink size={14} className="text-cyan-400 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+            </a>
+          ))}
         </div>
       </div>
     </motion.div>
@@ -604,7 +631,9 @@ For the complete visual profile, visit: https://jeevan-bhargav-portfolio.vercel.
   const projects: Project[] = [
     {
       name: "KickScore",
-      url: "https://kickscore.ng/",
+      websiteUrl: "https://kickscore.ng/",
+      appStoreUrl: "https://apps.apple.com/us/app/livescore-by-kickscore/id6754694311",
+      playStoreUrl: "https://play.google.com/store/apps/details?id=com.kickscore",
       image: "/projects/kickscore.jpg",
       description: "Real-time sports score tracker app and web platform built using Expo Web code, delivering low-latency updates.",
       tech: ["React Native Expo", "Expo Web", "Push Notifications", "Firebase", "API Integration"],
@@ -612,7 +641,8 @@ For the complete visual profile, visit: https://jeevan-bhargav-portfolio.vercel.
     },
     {
       name: "Visualible",
-      url: "https://play.google.com/store/apps/details?id=com.visualible",
+      playStoreUrl: "https://play.google.com/store/apps/details?id=com.visualible",
+      appStoreUrl: "https://apps.apple.com/in/app/visualible-smart-book-reader/id6753102601",
       image: "/projects/visualible.jpg",
       description: "Next-gen immersive visual management application optimized for interactive and highly responsive devices.",
       tech: ["React Native Expo", "Firebase Auth", "Custom UI", "Stripe Payment"],
@@ -620,7 +650,7 @@ For the complete visual profile, visit: https://jeevan-bhargav-portfolio.vercel.
     },
     {
       name: "My Fairly",
-      url: "https://apps.apple.com/us/app/my-fairly/id6747285778",
+      appStoreUrl: "https://apps.apple.com/us/app/my-fairly/id6747285778",
       image: "/projects/myfairly.jpg",
       description: "Premium iOS mobile application built to provide specialized concierge and payment management flows.",
       tech: ["React Native", "Stripe payment", "iOS App Support", "Firebase"],
@@ -628,7 +658,7 @@ For the complete visual profile, visit: https://jeevan-bhargav-portfolio.vercel.
     },
     {
       name: "IQONS",
-      url: "https://play.google.com/store/apps/details?id=com.iqons.app",
+      playStoreUrl: "https://play.google.com/store/apps/details?id=com.iqons.app",
       image: "/projects/iqons.jpg",
       description: "Premium social matching and brand display workspace with robust security and fast-loading profiles.",
       tech: ["React Native Expo", "One-to-one chat", "Group Chat", "Firebase Integration"],
